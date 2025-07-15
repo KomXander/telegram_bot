@@ -48,7 +48,7 @@ quiz_data = [
     {
         'question' : 'Что находится под небом голубым?',
         'options': ['город золотой', 'станица', 'ПГТ', 'деревня'],
-        'correct_option': 2
+        'correct_option': 0
 
     },
     {
