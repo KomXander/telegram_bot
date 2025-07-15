@@ -36,7 +36,7 @@ quiz_data = [
     {
         'question' : 'В каком месяце в старом парке таят снег?',
         'options': ['январь', 'февраль', 'март', 'апрель'],
-        'correct_option': 2
+        'correct_option': 3
 
     },
     {

@@ -20,7 +20,7 @@
 
 Ссылка на бота
 
-[Перейти к боту](https://t.me/@lab_quizBot)
+https://t.me/lab_quizBot
 
  Запуск проекта
 
