@@ -49,18 +49,18 @@ def register_handlers(dp: Dispatcher):
         else:
             await callback.message.answer(f"Неправильно. Правильный ответ: {question['options'][correct_index]}")
 
-        current_question_index += 1
-        await update_quiz_index(user_id, current_question_index)
-
-        if current_question_index < len(quiz_data):
-            await send_question(callback.message, user_id)
-        else:
+        # Проверяем, последний ли это вопрос
+        if current_question_index + 1 == len(quiz_data):
             score = user_scores.get(user_id, 0)
             await save_quiz_result(user_id, score)
             await callback.message.answer(f"Квиз завершен! Ваш результат: {score} из {len(quiz_data)}")
             user_scores.pop(user_id, None)
-            # Сброс индекса на 0, чтобы можно было начать заново
-            await update_quiz_index(user_id, 0)
+            await update_quiz_index(user_id, 0)  # Сбрасываем индекс
+        else:
+            # Переходим к следующему вопросу
+            current_question_index += 1
+            await update_quiz_index(user_id, current_question_index)
+            await send_question(callback.message, user_id)
 
     @dp.message(Command("stats"))
     async def cmd_stats(message: types.Message):
@@ -76,6 +76,7 @@ def register_handlers(dp: Dispatcher):
 
     async def new_quiz(message):
         user_id = message.from_user.id
+        user_scores[user_id] = 0
         await update_quiz_index(user_id, 0)
         await send_question(message, user_id)
 
